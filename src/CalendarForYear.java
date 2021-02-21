@@ -17,21 +17,13 @@ class CalendarForYear {
 
         };
 
-        int j=0;
+        int currentDay = 0;
 
-        for(int k = 0; k < months.length; k++){
-            int i = 1;
-
-            while(i <= days[k]){
-                if(j > 6) {j = 0;}
-
-                if(j>4){
-                    System.out.println(months[k] + " " + dayOfWeek[j] + " " + i + " Holiday!");
-                }else{
-                    System.out.println(months[k] + " " + dayOfWeek[j] + " " + i);
-                }
-                j++;
-                i++;
+        for(int i = 0; i < months.length; i++){
+            for (int j = 1; j <= days[i]; j++){
+                boolean isHoliday = (currentDay + 1) % 7 % 6 == 0; //saturday or sunday
+                System.out.println(months[i] + " " + dayOfWeek[currentDay%7] + " " + j + (isHoliday ? " Holiday!" : ""));
+                currentDay++;
             }
         }
     }
