@@ -55,9 +55,14 @@ public class Archive extends Storage{
 
     @Override
     public ArrayList<Bid> getBidBetween(Date d1, Date d2) {
-        //TODO
-        return null;
+        ArrayList<Bid> betweenBid = new ArrayList<>();
+        for(Bid bid: allBid){
+            if(bid.getDate().after(d1) && bid.getDate().before(d2)){
+                betweenBid.add(bid);
+            }
+        }        return null;
     }
+
     public static boolean validate(Bid bid) throws Exception {
         if(bid.getName().length() < 3){
             throw new Exception("Имя должно содержать в себе более 2х символов");
