@@ -65,11 +65,14 @@ public class Archive extends Storage{
 
     public static boolean validate(Bid bid) throws Exception {
         if(bid.getName().length() < 3){
+            bid.setStatus(Status.REMOVED);
             throw new Exception("Имя должно содержать в себе более 2х символов");
         }
         if (validateEmail(bid.getEmail())) {
+            bid.setStatus(Status.RESOLVED);
             return true;
         }else{
+            bid.setStatus(Status.REMOVED);
             throw new Exception("Некоректный email");
         }
     }
