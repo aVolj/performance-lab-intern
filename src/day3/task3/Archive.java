@@ -9,13 +9,17 @@ import java.util.regex.Pattern;
  * todo Document type Archive
  */
 public class Archive extends Storage{
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-        Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     ArrayList<Bid> allBid = new ArrayList<>();
 
     @Override
-    public boolean addBid(Bid bid) {
+    public boolean addBid(Bid bid){
+        try {
+            validate(bid);
+        } catch (Exception e) {
+            bid.setStatus(Status.REMOVED);
+            System.err.println(e.getMessage());
+        }
         allBid.add(bid);
         return true;
     }
@@ -60,20 +64,21 @@ public class Archive extends Storage{
             if(bid.getDate().after(d1) && bid.getDate().before(d2)){
                 betweenBid.add(bid);
             }
-        }        return null;
+        }        return betweenBid;
     }
 
-    public static boolean validate(Bid bid) throws Exception {
-        if(bid.getName().length() < 3){
-            bid.setStatus(Status.REMOVED);
-            throw new Exception("Имя должно содержать в себе более 2х символов");
-        }
+    public static void validate(Bid bid) throws Exception{
         if (validateEmail(bid.getEmail())) {
             bid.setStatus(Status.RESOLVED);
-            return true;
         }else{
             bid.setStatus(Status.REMOVED);
-            throw new Exception("Некоректный email");
+            throw new Exception("Некоректный email в заявке с id = "+ bid.getId());
+        }
+        if(bid.getName().length() < 3){
+            bid.setStatus(Status.REMOVED);
+            throw new Exception("Имя должно содержать в себе более 2х символов в " +
+                "заявке с id = " + bid.getId());
+
         }
     }
 

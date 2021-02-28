@@ -2,12 +2,13 @@ package day3.task3;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * todo Document type Bid
  */
 public class Bid {
-    private static int nId = 1;
+
     private int id;
     private Date date;
     private String surname;
@@ -15,18 +16,18 @@ public class Bid {
     private String txtComplaint;
     private ArrayList<Attachment> attachmentArrayList;
     private String email;
-    private Enum<Status> status = Status.RECEIVED;
+    private Status status = Status.RECEIVED;
 
     @Override
     public String toString(){
-        return "Ид заявки - " + id +" Время создания " + date +
+        return "\nИд заявки - " + id +" Время создания " + date +
             "\nСоздана: " + surname + " " + name + " Статус " + status;
     }
 
     public Bid(String surname, String name, String txtComplaint, ArrayList<Attachment> attachmentArrayList,
         String email) {
-        this.id = nId;
-        nIdInc();
+        int randomId = (int) (Math.random()*100 + 1);
+        this.id = randomId;
         this.date = new Date();
         this.surname = surname;
         this.name = name;
@@ -35,12 +36,8 @@ public class Bid {
         this.email = email;
     }
 
-    public void setStatus(Enum<Status> status) {
+    public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public static int getnId() {
-        return nId;
     }
 
     public int getId() {
@@ -71,11 +68,8 @@ public class Bid {
         return email;
     }
 
-    public Enum<Status> getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    private void nIdInc(){
-        nId++;
-    }
 }

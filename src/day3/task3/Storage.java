@@ -7,10 +7,10 @@ import java.util.Date;
  * todo Document type Storage
  */
 public abstract class Storage {
-    abstract boolean addBid(Bid bid);
-    abstract boolean removeBid(Bid bid);
-    abstract ArrayList<Bid> getAllSuccessBid();
-    abstract ArrayList<Bid> getAllDeleteBid();
-    abstract ArrayList<Bid> getAllBid();
-    abstract ArrayList<Bid> getBidBetween(Date d1, Date d2);
+    public abstract boolean addBid(Bid bid) throws Exception;
+    public abstract boolean removeBid(Bid bid);
+    public abstract ArrayList<Bid> getAllSuccessBid();
+    public abstract ArrayList<Bid> getAllDeleteBid();
+    public abstract ArrayList<Bid> getAllBid();
+    public abstract ArrayList<Bid> getBidBetween(Date d1, Date d2);
 }
