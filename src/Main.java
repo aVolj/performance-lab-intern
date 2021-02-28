@@ -1,20 +1,13 @@
-import day2.task1.MC_21;
-import day2.task2.CastomSecurity;
-import day2.task2.Role;
-import day2.task2.User;
-import day2.task3.EnumDirection;
-import day3.task3.*;
-import day4.task2.BurgerValidator;
-import day4.task2.Ingredients;
-import day4.task2.IngredientsGenerator;
+import day4.task2.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 class Main {
-    public static void main(String[] args) throws Exception {
-        Attachment attachment = new Attachment(12.3);
+    public static void main(String[] args){
+
+        //day3.task3
+/*        Attachment attachment = new Attachment(12.3);
         ArrayList<Attachment> arrAttachment = new ArrayList<>();
         List<Bid> bidList = new ArrayList<>();
 
@@ -45,18 +38,24 @@ class Main {
         System.out.println("===================================");
         System.out.println(storage.getAllSuccessBid());
     }
-}
+}*/
 
         //day4.task2
-//        List<List<Ingredients>> pileOfPackages =
-//            IngredientsGenerator.generateIngredients(5);
-//        printPileOfIngredients(pileOfPackages);
-//    }
-//
-//    public static void printPileOfIngredients(List<List<Ingredients>> list){
-//        for(List<Ingredients> element: list){
-//            System.out.println(element);
-//            System.out.println(BurgerValidator.validate(element));
-//        }
-//    }
-//}
+        List<List<Ingredients>> pileOfPackages =
+            IngredientsGenerator.generateIngredients(15);
+
+        Chef chef = new Chef("Jean");
+        List<Burger> burgers = new ArrayList<>();
+        for(List<Ingredients> packIngredients : pileOfPackages) {
+                try {
+                    burgers.add(chef.makeBurger(packIngredients));
+                } catch (BurgerException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+
+        for(Burger burger: burgers){
+            burger.printComposition();
+        }
+    }
+}
