@@ -49,7 +49,9 @@ public class Wagon implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        if(this.getWeight() < ((Wagon) o).getWeight()){
+        if (!(o instanceof Wagon) || o == null) {
+            throw new UnsupportedOperationException("Попытка сравнения объектов разного типа!");
+        }if(this.getWeight() < ((Wagon) o).getWeight()){
             return 1;
         }else if(this.getWeight() > ((Wagon) o).getWeight()){
             return -1;
