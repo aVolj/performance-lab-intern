@@ -1,6 +1,4 @@
 import day4.task2.*;
-import day4.task3.Test1;
-import day4.task3.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +39,6 @@ class Main {
         System.out.println(storage.getAllSuccessBid());
     }
 }*/
-        Util util = new Util();
-        Test1 test = new Test1();
-        util.benchmark(test.callable, 100000);
 
         //day4.task2
         List<List<Ingredients>> pileOfPackages =
